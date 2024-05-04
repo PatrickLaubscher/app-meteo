@@ -4,7 +4,6 @@ import styles from "./MainCard.module.css";
 
 export const MainCard = ({
   city,
-  country,
   description,
   iconName,
   unitSystem,
@@ -13,7 +12,7 @@ export const MainCard = ({
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.location}>
-        {city}, {country}
+        {city}
       </h1>
       <p className={styles.description}>{description}</p>
       <Image
