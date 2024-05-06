@@ -15,6 +15,8 @@ export default async function hourlyData (data) {
       daySwitch = 'n';
     }
     
+    const timeZone = 60 * date.getTimezoneOffset();
+
     const weatherCode = data.hourly.weather_code[hour];
 
     const weatherIcon = findIcon(weatherCode, daySwitch);
@@ -34,7 +36,9 @@ export default async function hourlyData (data) {
       dt: data.hourly.time[hour],
       sunrise: data.daily.sunrise[0],
       sunset: data.daily.sunset[0],
-      timezone: 7200
+      t_max : data.daily.temperature_2m_max[0],
+      t_min : data.daily.temperature_2m_min[0],
+      timezone: timeZone
     };
     
     return dataProcessed;

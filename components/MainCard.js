@@ -23,6 +23,15 @@ export const MainCard = ({
         {Math.round(weatherData.temp)}
         °C
       </h1>
+      <p className={styles.temperatureScale}>
+        Tmin {" "}
+        {Math.round(weatherData.t_min)}
+        °C
+        -
+        Tmax {" "}
+        {Math.round(weatherData.t_max)}
+        °C
+      </p>
       <p>
         Ressenti {" "}
         {Math.round(weatherData.feels_like)}

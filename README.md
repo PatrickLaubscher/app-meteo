@@ -29,16 +29,8 @@ Meteo application for transport services in France, based on the current applica
 
 3. `npm install`
 
-4. Log-in to [geocode.maps.co](https://geocode.maps.co/)
+4. Change `cityName` and `postalCode` in `config.json`
 
-5. Create an API key
-
-6. `cp .env.example .env.local`
-
-7. Paste API key for `GEOCODING_API_KEY`
-
-8. Change `cityName` and `postalCode` in `config.json`
-
-8. `npm run dev`
+5. `npm run dev`
 
 

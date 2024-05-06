@@ -16,3 +16,8 @@
 .temperature {
   font-size: 84px;
 }
+
+.temperatureScale {
+  font-size: 14px;
+  margin-bottom: 5px;
+}

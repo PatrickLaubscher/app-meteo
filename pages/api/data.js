@@ -1,21 +1,28 @@
 import config from '../../config.json';
 
-export default async function handler() {
+export default async function handler(req, res) {
 
-  const { cityName, postalCode } = config;
+  try {
+    const { cityName } = config;
 
-  const getCoordinates = await fetch(
-    `https://geocode.maps.co/search?q=${cityName}+${postalCode}+france&api_key=6635ed7c02e00632496336ncf34c563`
-  )
-  const coordinates = await getCoordinates.json();
+    const getCoordinates = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=fr&format=json`
+    )
+    const coordinates = await getCoordinates.json();
 
 
-  const latitude = coordinates[0].lat;
-  const longitude = coordinates[0].lon;
+    const { latitude } = coordinates.results[0];
+    const { longitude } = coordinates.results[0];
 
-  const getWeatherData = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,visibility,wind_speed_10m,wind_direction_10m,is_day&daily=sunrise,sunset&timeformat=unixtime&timezone=GMT`
-  );
-  const data = await getWeatherData.json();
-  return data;
+    const getWeatherData = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,visibility,wind_speed_10m,wind_direction_10m,is_day&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min&timeformat=unixtime&timezone=GMT`
+    );
+    const data = await getWeatherData.json();
+
+    res.status(200).json(data);
+  } 
+  catch (err) {
+    res.status(500).json({ message: "Erreur lors de la récupération des données"});
+  }
+  
 }

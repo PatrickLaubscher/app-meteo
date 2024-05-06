@@ -10,9 +10,10 @@ export const DateAndTime = ({ weatherData }) => {
       </h2>
       <h2>
         <Clock 
-          format={'h:mm:ss'}
+          format={'HH:mm:ss'}
           style={{padding: '0px 5px'}} 
-          ticking={true} /> 
+          ticking={true}
+          imezone={'EU/Paris'}/> 
       </h2>
     </div>
   );
