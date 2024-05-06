@@ -7,7 +7,7 @@ export default function findDescription (weatherCode) {
             description = 'Ciel dégagé'
         break;
         case 1:
-            description = 'Ciel presque dégagé'
+            description = 'Ciel voilé'
         break;
         case 2:
             description = 'Temps partiellement nuageux'
@@ -41,10 +41,10 @@ export default function findDescription (weatherCode) {
         break; 
         case 80: 
         case 81:
-            description = 'Averses de pluie'
+            description = 'Averses de pluies'
         break; 
         case 82:
-            description = 'Averses de pluie violentes'
+            description = 'Averses de pluies violentes'
         break;
         case 66: 
         case 67:
@@ -52,8 +52,10 @@ export default function findDescription (weatherCode) {
         break;
         case 95: 
         case 96: 
+            description = 'Risque d\'orages'
+        break;
         case 99:
-            description = 'Risque d\'orage'
+            description = 'Risque d\'orages violents'
         break;
         case 71:
             description = 'Quelques flocons'

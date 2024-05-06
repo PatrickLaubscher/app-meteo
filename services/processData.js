@@ -7,7 +7,7 @@ export default async function hourlyData (data) {
 
     const date = new Date();
     const hour = date.getHours();
-    
+
     let daySwitch;   
     if (data.hourly.is_day[hour] === 1) {
       daySwitch = 'd';

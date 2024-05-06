@@ -24,13 +24,10 @@ export const getWeekDay = (weatherData) => {
 };
 
 export const getDate = () => {
-
   const date = new Date();
-
   let day = date.getDate();
   let monthNumber = date.getMonth();
   let year = date.getFullYear();
-
   const month = [
     "Janvier",
     "Février",
@@ -47,7 +44,5 @@ export const getDate = () => {
   ];
 
   let currentDate = `le ${day} ${month[monthNumber]} ${year}`;
-
   return currentDate;
-
 }

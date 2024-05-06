@@ -20,15 +20,12 @@ export const App = () => {
     const getData = async () => {
       const data = await handler();
       const dataProcessed = await hourlyData(data);
-
-      console.log(dataProcessed);
-
       setWeatherData(dataProcessed);
     };
     getData();
+    const countHourly = setInterval(getData(), 1000*60*60)
+    return () => clearInterval(countHourly);
   }, []);
-  ;
-  
 
   return weatherData && !weatherData.message ? (
       
