@@ -3,7 +3,7 @@ import findDescription from "./findDescription";
 import findIcon from "./findIcon";
 
 
-export default async function hourlyData (data) {
+export default function hourlyData (data) {
 
     const date = new Date();
     const hour = date.getHours();

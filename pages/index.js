@@ -11,24 +11,36 @@ import styles from "../styles/Home.module.css";
 import hourlyData from "../services/processData";
 
 export const App = () => {
+  const [apiData, setApiData] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-
-    try {
       const getData = async () => {
-        const res = await fetch('/api/data');
-        const data = await res.json();
-        const dataProcessed = await hourlyData(data);
-        setWeatherData(dataProcessed);
+        try {
+          const res = await fetch('/api/data');
+          const data = await res.json();
+          setApiData(data);
+        } catch (err) {
+          res.status(500).json({ message: "Erreur lors de la récupération des données"});
+        }
       };
       getData();
-      const countHourly = setInterval(getData(), 1000*60*60)
-      return () => clearInterval(countHourly);
-    } catch {
-      res.status(500).json({ message: "Erreur lors de la récupération des données"});
-    }
+      const countDaily = setInterval(getData, 1000*60*60*24)
+      return () => clearInterval(countDaily);
   }, []);
+
+  useEffect(() => {
+    const getHourlyData = () => {
+      if (apiData) {
+        const dataProcessed = hourlyData(apiData);
+        setWeatherData(dataProcessed);
+      }
+    };
+    getHourlyData();
+    const countHourly = setInterval(getHourlyData, 1000*60*60)
+    return () => clearInterval(countHourly);
+  }, [apiData]);
+
 
   return weatherData && !weatherData.message ? (
       
