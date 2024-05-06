@@ -37,7 +37,7 @@ Meteo application for transport services in France, based on the current applica
 
 7. Paste API key for `GEOCODING_API_KEY`
 
-8. Change "cityName" and "postalCode" in config.json
+8. Change `cityName` and `postalCode` in `config.json`
 
 8. `npm run dev`
 
