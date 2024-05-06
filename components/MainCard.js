@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ctoF } from "../services/converters";
 import styles from "./MainCard.module.css";
 
 export const MainCard = ({
@@ -25,7 +24,7 @@ export const MainCard = ({
         °C
       </h1>
       <p>
-        Feels like{" "}
+        Ressenti {" "}
         {Math.round(weatherData.feels_like)}
         °C
       </p>

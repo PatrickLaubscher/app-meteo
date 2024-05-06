@@ -33,7 +33,7 @@ export const MetricsBox = ({ weatherData }) => {
         unit={"km"}
       />
       <MetricsCard
-        title={"Heure lever du soleil"}
+        title={"Lever du soleil"}
         iconSrc={"/icons/sunrise.png"}
         metric={getTime(
           weatherData.sunrise,
@@ -41,7 +41,7 @@ export const MetricsBox = ({ weatherData }) => {
         )}
       />
       <MetricsCard
-        title={"Heure coucher du soleil"}
+        title={"Coucher du soleil"}
         iconSrc={"/icons/sunset.png"}
         metric={getTime(
           weatherData.sunset,
