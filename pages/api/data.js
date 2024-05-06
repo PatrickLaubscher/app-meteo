@@ -5,7 +5,7 @@ export default async function handler() {
   const { cityName, postalCode } = config;
 
   const getCoordinates = await fetch(
-     `https://geocode.maps.co/search?q=${cityName}+${postalCode}+france&api_key=6635ed7c02e00632496336ncf34c563`
+    `https://geocode.maps.co/search?q=${cityName}+${postalCode}+france&api_key=6635ed7c02e00632496336ncf34c563`
   )
   const coordinates = await getCoordinates.json();
 
@@ -14,7 +14,7 @@ export default async function handler() {
   const longitude = coordinates[0].lon;
 
   const getWeatherData = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,apparent_temperature,weather_code,is_day&daily=sunrise,sunset&timezone=GMT`
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,visibility,wind_speed_10m,wind_direction_10m,is_day&daily=sunrise,sunset&timeformat=unixtime&timezone=GMT`
   );
   const data = await getWeatherData.json();
   return data;

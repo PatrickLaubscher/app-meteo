@@ -5,7 +5,6 @@ import { ContentBox } from "../components/ContentBox";
 import { Header } from "../components/Header";
 import { DateAndTime } from "../components/DateAndTime";
 import { MetricsBox } from "../components/MetricsBox";
-import { UnitSwitch } from "../components/UnitSwitch";
 import { LoadingScreen } from "../components/LoadingScreen";
 
 
@@ -16,24 +15,24 @@ import handler from "./api/data";
 
 export const App = () => {
   const [weatherData, setWeatherData] = useState(null);
-  const [unitSystem, setUnitSystem] = useState("metric");
 
   useEffect(() => {
     const getData = async () => {
       const data = await handler();
 
-      // console.log(data.hourly);
-
       const date = new Date();
       const hour = date.getHours();
     
       let daySwitch;
+
       if (data.hourly.is_day[hour] === 1) {
         daySwitch = 'd';
       } else {
         daySwitch = 'n';
       }
+    
       const code = data.hourly.weather_code[hour];
+      
       let icon;
       switch(code) {
       case 0:
@@ -48,23 +47,44 @@ export const App = () => {
       case 3:
         icon = '04'
       break;
-      case 61, 63, 51, 53, 55, 56, 57, 80, 81, 82:
+      case 61: 
+      case 63: 
+      case 51: 
+      case 53: 
+      case 55: 
+      case 56: 
+      case 57: 
+      case 80: 
+      case 81: 
+      case 82:
         icon = '09'
       break;
-      case 65, 66, 67 :
+      case 65:
+      case 66: 
+      case 67:
         icon = '10'
       break;
-      case 95, 96, 99 :
+      case 95: 
+      case 96: 
+      case 99:
         icon = '11'
       break;
-      case 71, 73, 75, 77, 85, 86 :
-      icon = '13'
+      case 71:
+      case 73: 
+      case 75: 
+      case 77: 
+      case 85: 
+      case 86:
+        icon = '13'
       break;
-      case 45, 48 :
+      case 45: 
+      case 48:
         icon = '50'
       break;
       }
+
       const weatherIcon = icon + daySwitch;
+
       const cityName = config.cityName;
 
       const dataProcessed = {
@@ -73,6 +93,14 @@ export const App = () => {
         iconName: weatherIcon,
         temp: data.hourly.temperature_2m[hour],
         feels_like: data.hourly.apparent_temperature[hour],
+        humidity: data.hourly.relative_humidity_2m[hour],
+        visibility: data.hourly.visibility[hour],
+        wind_speed: data.hourly.wind_speed_10m[hour],
+        wind_deg: data.hourly.wind_direction_10m[hour],
+        dt: data.hourly.time[0],
+        sunrise: data.daily.sunrise[0],
+        sunset: data.daily.sunset[0],
+        timezone: 7200
       };
 
       console.log(dataProcessed);
@@ -83,10 +111,6 @@ export const App = () => {
   }, []);
   ;
   
-  const changeSystem = () =>
-    unitSystem == "metric"
-      ? setUnitSystem("imperial")
-      : setUnitSystem("metric");
 
   return weatherData && !weatherData.message ? (
       
@@ -95,19 +119,16 @@ export const App = () => {
         city={weatherData.city}
         description={weatherData.description}
         iconName={weatherData.iconName}
-        unitSystem={unitSystem}
         weatherData={weatherData}
       />
         <ContentBox>
          <Header>
-          <DateAndTime weatherData={weatherData} unitSystem={unitSystem} />
+          <DateAndTime weatherData={weatherData} />
          </Header>
-         <MetricsBox weatherData={weatherData} unitSystem={unitSystem} />
-         <UnitSwitch onClick={changeSystem} unitSystem={unitSystem} />
+         <MetricsBox weatherData={weatherData} />
        </ContentBox>
       </div>
-  ) : weatherData && weatherData.message ? (Z
-    ) : (
+  ) : (
       <LoadingScreen loadingMessage="Chargement des données..." />
   );
 };
