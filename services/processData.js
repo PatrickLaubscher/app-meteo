@@ -15,8 +15,6 @@ export default function hourlyData (data) {
       daySwitch = 'n';
     }
     
-    const timeZone = 60 * date.getTimezoneOffset();
-
     const weatherCode = data.hourly.weather_code[hour];
 
     const weatherIcon = findIcon(weatherCode, daySwitch);
@@ -25,7 +23,7 @@ export default function hourlyData (data) {
     
     const dataProcessed = {
       city: cityName,
-      timezone: timeZone,
+      timezone: data.utc_offset_seconds,
       description: weatherDescription,
       iconName: weatherIcon,
       temp: data.hourly.temperature_2m[hour],

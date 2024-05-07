@@ -22,13 +22,14 @@ export const App = () => {
         const res = await fetch('/api/data');
         const data = await res.json();
         setApiData(data);
+        console.log(data);
       } catch (err) {
         res.status(500).json({ message: "Erreur lors de la récupération des données"});
       }
     };
     getData();
     
-    const taskGetData = cron.schedule('0 0 * * *', getData);
+    const taskGetData = cron.schedule('0 */8 * * *', getData);
     return () => {
       taskGetData.stop();
     };
@@ -47,7 +48,7 @@ export const App = () => {
     return () => {
       taskGetHourlyData.stop();
     };
-  }, []);
+  }, [apiData]);
   
 
 
