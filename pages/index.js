@@ -9,24 +9,29 @@ import { LoadingScreen } from "../components/LoadingScreen";
 
 import styles from "../styles/Home.module.css";
 import hourlyData from "../services/processData";
+import cron from 'node-cron';
+
 
 export const App = () => {
   const [apiData, setApiData] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-      const getData = async () => {
-        try {
-          const res = await fetch('/api/data');
-          const data = await res.json();
-          setApiData(data);
-        } catch (err) {
-          res.status(500).json({ message: "Erreur lors de la récupération des données"});
-        }
-      };
-      getData();
-      const countDaily = setInterval(getData, 1000*60*60*24)
-      return () => clearInterval(countDaily);
+    const getData = async () => {
+      try {
+        const res = await fetch('/api/data');
+        const data = await res.json();
+        setApiData(data);
+      } catch (err) {
+        res.status(500).json({ message: "Erreur lors de la récupération des données"});
+      }
+    };
+    getData();
+    
+    const taskGetData = cron.schedule('0 0 * * *', getData);
+    return () => {
+      taskGetData.stop();
+    };
   }, []);
 
   useEffect(() => {
@@ -37,9 +42,13 @@ export const App = () => {
       }
     };
     getHourlyData();
-    const countHourly = setInterval(getHourlyData, 1000*60*60)
-    return () => clearInterval(countHourly);
-  }, [apiData]);
+    
+    const taskGetHourlyData = cron.schedule('0 * * * *', getHourlyData);
+    return () => {
+      taskGetHourlyData.stop();
+    };
+  }, []);
+  
 
 
   return weatherData && !weatherData.message ? (

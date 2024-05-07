@@ -41,10 +41,10 @@ export default function findDescription (weatherCode) {
         break; 
         case 80: 
         case 81:
-            description = 'Averses de pluies'
+            description = 'Averses'
         break; 
         case 82:
-            description = 'Averses de pluies violentes'
+            description = 'Averses violentes'
         break;
         case 66: 
         case 67:

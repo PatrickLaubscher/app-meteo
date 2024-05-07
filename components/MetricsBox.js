@@ -10,6 +10,18 @@ export const MetricsBox = ({ weatherData }) => {
   return (
     <div className={styles.wrapper}>
       <MetricsCard
+        title={"Risque de précipitations"}
+        iconSrc={"/icons/umbrella.svg"}
+        metric={weatherData.precipitation_probability}
+        unit={"%"}
+      />
+      <MetricsCard
+        title={"Cumul total des précipitations"}
+        iconSrc={"/icons/cumul-rain.svg"}
+        metric={weatherData.precipitation_cumul}
+        unit={"mm"}
+      />
+      <MetricsCard
         title={"Humidité"}
         iconSrc={"/icons/humidity.png"}
         metric={weatherData.humidity}
@@ -45,6 +57,14 @@ export const MetricsBox = ({ weatherData }) => {
         iconSrc={"/icons/sunset.png"}
         metric={getTime(
           weatherData.sunset,
+          weatherData.timezone
+        )}
+      />
+      <MetricsCard
+        title={"Durée du jour"}
+        iconSrc={"/icons/duration-day.png"}
+        metric={getTime(
+          weatherData.daylight_duration,
           weatherData.timezone
         )}
       />

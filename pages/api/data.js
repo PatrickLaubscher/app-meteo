@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const { longitude } = coordinates.results[0];
 
     const getWeatherData = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,visibility,wind_speed_10m,wind_direction_10m,is_day&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min&timeformat=unixtime&timezone=GMT`
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,visibility,wind_speed_10m,wind_direction_10m,is_day,precipitation_probability&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min,precipitation_sum,daylight_duration&timeformat=unixtime&timezone=GMT&forecast_days=3`
     );
     const data = await getWeatherData.json();
 
