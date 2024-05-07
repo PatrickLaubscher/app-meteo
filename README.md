@@ -57,7 +57,7 @@ For refactoring, getHourlyData and both switch functions have been implemented i
 
 4. Data refreshing 
 
-As requested, a hourly refreshing data has been implemented. In that way, I chose to use `node-cron`. The function for getting the weather data is called every hour and the API fetch is set on 12h cycle basis.
+As requested, a hourly refreshing data has been implemented. In that way, I chose to use `node-cron`. The function for getting the weather data is called every hour and the API fetch is set on 8h cycle basis.
 
 5. Improvement suggestions
 
