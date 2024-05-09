@@ -31,7 +31,7 @@ Meteo application for transport services in France, based on the current applica
 
 3. `npm install`
 
-4. Change `cityName` and `postalCode` in `config.json`
+4. Change `cityName` in `config.json`
 
 5. `npm run dev`
 
