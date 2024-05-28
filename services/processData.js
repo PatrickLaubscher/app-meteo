@@ -1,4 +1,3 @@
-import config from "../config.json";
 import findDescription from "./findDescription";
 import findIcon from "./findIcon";
 
@@ -19,10 +18,10 @@ export default function hourlyData (data) {
 
     const weatherIcon = findIcon(weatherCode, daySwitch);
     const weatherDescription = findDescription(weatherCode);    
-    const cityName = config.cityName;
+
     
     const dataProcessed = {
-      city: cityName,
+      city: data.city_name,
       timezone: data.utc_offset_seconds,
       description: weatherDescription,
       iconName: weatherIcon,

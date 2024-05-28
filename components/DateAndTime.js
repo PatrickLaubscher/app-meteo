@@ -13,7 +13,7 @@ export const DateAndTime = ({ weatherData }) => {
           format={'HH:mm:ss'}
           style={{padding: '0px 5px'}} 
           ticking={true}
-          imezone={'EU/Paris'}/> 
+          Timezone={'Europe/Paris'}/> 
       </h2>
     </div>
   );
