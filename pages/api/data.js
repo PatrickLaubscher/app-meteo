@@ -8,6 +8,11 @@ export default async function handler(req, res) {
     )
     const coordinates = await getCoordinates.json();
 
+    if (coordinates.results.length === 0) {
+      return res.status(404).json({ message: "Ville non trouvée, faites une nouvelle reherche" });
+    }
+
+
     const cityName = coordinates.results[0].name;
     const { latitude } = coordinates.results[0];
     const { longitude } = coordinates.results[0];

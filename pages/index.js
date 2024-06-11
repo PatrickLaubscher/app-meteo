@@ -28,13 +28,14 @@ export const App = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ cityInput }),
         });
+        if (!res.ok) {
+          throw new Error("Ville non trouvée");
+        }
         const data = await res.json();
         setApiData(data);
         setCityInput("");
-        console.log(data);
-
       } catch (err) {
-        res.status(500).json({ message: "Erreur lors de la récupération des données"});
+        setWeatherData({ message: err.message }); 
       }
     };
     getData();
