@@ -78,6 +78,7 @@ export const App = () => {
           <Search
             placeHolder="Cherchez une ville..."
             value={cityInput}
+            autocomplete="on"
             onFocus={(e) => {
               e.target.value = "";
               e.target.placeholder = "";
